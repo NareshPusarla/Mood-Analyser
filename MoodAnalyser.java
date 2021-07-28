@@ -2,6 +2,8 @@ package com.bridgelabz.regex;
 
 import java.util.Scanner;
 
+import com.bridgelabz.regex.MoodCustomException.ExceptionType;
+
 public class MoodAnalyser {
 	public static String message;
 
@@ -29,8 +31,11 @@ public class MoodAnalyser {
 		} else if (this.message.equals("happy")) {
 			System.out.println("I am in Happy Mood");
 		}
-		else{
-			throw new MoodCustomException("Message can't be null or invalid , so try happy or sad.");
+		else if (this.message == null) {
+			throw new MoodCustomException(ExceptionType.Null, "Message can't be null");
+		}
+		else if(this.message.isEmpty()){
+			throw new MoodCustomException(ExceptionType.EmptyString, "Message can't be empty");
 		}
 	}
 }
